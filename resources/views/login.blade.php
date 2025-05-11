@@ -13,7 +13,8 @@
                 <!-- form -->
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-12">
-                        <form action="#" method="post">
+                        <form action="/loginSubmit" method="post">
+                            @csrf
                             <div class="mb-3">
                                 <label for="text_username" class="form-label">Username</label>
                                 <input type="text" class="form-control bg-dark text-info" name="text_username" required>
@@ -33,6 +34,17 @@
                 <div class="text-center text-secondary mt-3">
                     <small>&copy; <?= date('Y') ?> Notes</small>
                 </div>
+
+                {{-- erros --}}
+                @if ($erros->any())
+                    <div class="alert alert-danger mt-3">
+                        <ul class="m-0">
+                            @foreach ($erros->all() as $erro)
+                                <li>{{ $erro }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
             </div>
         </div>
