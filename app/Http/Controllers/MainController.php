@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Operations;
 use App\User;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
@@ -24,24 +25,15 @@ class MainController extends Controller
 
     public function editNote($id)
     {
-        $id = $this->decryptId($id);
+        // $id = $this->decryptId($id);
+        $id = Operations::decryptId($id);
         echo "Edite o Id = $id";
     }
 
     public function deleteNote($id)
     {
-        $id = $this->decryptId($id);
+        // $id = $this->decryptId($id);
+        $id = Operations::decryptId($id);
         echo "Delete o Id = $id";
-    }
-
-    private function decryptId($id)
-    {
-         try {  
-            $id = Crypt::decrypt($id);
-        } catch (DecryptException $e) {
-            return redirect()->route('home');
-        }
-
-        return $id;
     }
 }
