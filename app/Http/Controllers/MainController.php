@@ -12,7 +12,7 @@ class MainController extends Controller
     public function index()
     {
         $id = session('user.id');
-        $notes = User::find($id)->notes()->whereNull('delete_at')->get()->toArray();
+        $notes = User::find($id)->notes()->whereNull('deleted_at')->get()->toArray();
 
         return view('home', ['notes' => $notes]);
     }
